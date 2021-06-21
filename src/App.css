@@ -1,38 +1,116 @@
+body {
+  background-image: url("https://cdn.pixabay.com/photo/2014/02/12/18/11/lettuce-264826_1280.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .App {
+  display: grid;
+}
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 3px solid rgb(26, 24, 24);
+  /* background-color: rgb(173, 171, 164, 0.3); */
+}
+
+.grid-containers {
+  display: grid;
+  grid-template-columns: repeat(3, 2fr);
+  gap: 30px;
+}
+
+.calendar {
+  width: 80%;
+}
+.react-calendar__month-view__weekdays {
+  color: gray;
+}
+
+.react-calendar__navigation button {
+  font-size: 1em;
+}
+
+.search-bar {
+  grid-column: 2 / 3;
+
+  text-align: center;
+  display: grid;
+  justify-content: center;
+}
+
+button {
+  width: 60px;
+  margin-top: 10px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input {
+  width: 600px;
+  height: 30px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Modal-content {
+  display: grid;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.close-modal-button {
+  color: red;
+  margin-top: 25px;
+  margin-left: 590px;
+}
+
+.form-weight {
+  display: grid;
+  margin-top: 30px;
+}
+
+.select {
+  height: 20px;
+  margin-left: 10px;
+}
+
+.add-button {
+  height: 20px;
+  width: 80px;
+  text-align: center;
+}
+
+.calories-calculator {
+  margin-left: 10px;
+}
+
+.Quantity {
+  width: 100px;
+  height: 15px;
+  margin-right: 30px;
+}
+
+.calories-result {
+  margin-top: 40px;
+}
+
+.table-content {
+  margin-top: 30px;
+  background-color: black;
+  opacity: 0.6;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.top-table {
+  color: red;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+table,
+th,
+td {
+  border: 1px solid rgb(241, 238, 238);
+  width: 610px;
+}
+
+.statistic-table {
+  border-style: solid;
+  margin-top: 20px;
+  height: 100%;
+  color: white;
 }
