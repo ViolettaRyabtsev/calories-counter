@@ -5,6 +5,8 @@ import ModalPopUp from "./Modal";
 import Table from "./Table";
 import { AiOutlineClose } from "react-icons/ai";
 import Statistic from "./Statistic";
+import axios from "axios";
+const serverUrl = "http://localhost:5000/addItem";
 
 const customStyles = {
   overlay: {
@@ -34,7 +36,7 @@ const customStyles = {
 };
 
 const YOUR_APP_ID = "1822cb4f";
-const YOUR_APP_KEY = "c86d2692b0f8b1ec8e54686f75bab2df";
+const YOUR_APP_KEY = "##";
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -46,6 +48,7 @@ class SearchBar extends React.Component {
       openModal: false,
       gramms: [],
       addResultTable: [],
+      sumOfCalories: 0,
     };
   }
 
@@ -88,8 +91,6 @@ class SearchBar extends React.Component {
   };
 
   handleChange = (event) => {
-    console.log(event.target.value, "input");
-
     this.setState({
       type: event.target.value,
     });
@@ -108,15 +109,31 @@ class SearchBar extends React.Component {
     }
   };
 
-  saveStatistic = () => {
-    this.setState({
-      addResultTable: this.state.addResultTable,
+  saveStatistic = async () => {
+    //post to data base
+    const cal = [];
+    this.state.addResultTable.forEach((obj) => {
+      cal.push(obj.cal);
     });
+    const calResult = cal.reduce((a, b) => a + b, 0);
+    this.setState({
+      sumOfCalories: calResult,
+    });
+
+    // const obj = {
+    //   date: new Date(),
+    //   calories: this.state.sumOfCalories,
+    // };
+
+    await axios
+      .post(serverUrl, { data: new Date(), calories: this.state.sumOfCalories })
+      .catch((err) => console.log("error : ", err));
   };
-  // componentWillUnmount = () => {};
 
   render() {
     console.log(this.state.addResultTable, "table results ");
+    console.log(this.state.sumOfCalories, "sum of calories");
+
     return (
       <div className="grid-containers">
         <div>
@@ -147,9 +164,9 @@ class SearchBar extends React.Component {
             />
           </Modal>
           <Table tableResult={this.state.addResultTable} />
-          <button onClick={this.state.saveStatistic}>save my statistic</button>
+          <button onClick={this.saveStatistic}>save my statistic</button>
         </div>
-        <Statistic statisticArray={this.state.addResultTable} />
+        <Statistic sum={this.state.sumOfCalories} />
       </div>
     );
   }
